@@ -1,6 +1,6 @@
 const { Schema } = require('mongoose')
 
-const IngredientSchema = new mongoose.Schema({
+const IngredientSchema = new Schema({
   name: { type: String },
   amount: { type: Number },
   unit: { type: String }
