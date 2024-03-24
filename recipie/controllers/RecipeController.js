@@ -12,6 +12,7 @@ const GetRecipes = async (req, res) => {
 }
 
 const getRecipesDetails = async (req, res) => {
+  console.log(req.params.recipe_id)
   const recipeId = req.params.recipe_id
   try {
     const recipe = await Recipe.findById(recipeId).populate('reviews')
@@ -22,31 +23,30 @@ const getRecipesDetails = async (req, res) => {
 }
 
 const CreateRecipe = async (req, res) => {
-  const title = req.body.title;
-  const description = req.body.description;
-  const cookingTime = req.body.cookingTime;
-  const steps = req.body.steps;
-  const photo = req.body.photo;
-  const ingredients = req.body.ingredients;
+  console.log('got to the create cntroller')
+  const title = req.body.title
+  const description = req.body.description
+  const cookingTime = req.body.cookingTime
+  const steps = req.body.steps
+  const photo = req.body.photo
+  const ingredients = req.body.ingredients
 
   try {
- 
     const recipe = new Recipe({
       title,
       description,
       cookingTime,
       steps,
       photo,
-      ingredient: ingredients 
-    });
-    await recipe.save();
-   
+      ingredient: ingredients
+    })
+    await recipe.save()
+
     res.send(recipe)
   } catch (error) {
     throw error
   }
 }
-
 
 const UpdateRecipe = async (req, res) => {
   try {
@@ -63,13 +63,17 @@ const UpdateRecipe = async (req, res) => {
 
 const DeleteRecipe = async (req, res) => {
   try {
-    await Recipe.deleteOne({ _id: req.params.recipe_id })
+    console.log('got here in the delete controller', req.params.recipe_id)
+    const recipeId = req.params.recipe_id
+    await Recipe.findOneAndDelete({ _id: recipeId })
     res.send({
       msg: 'Recipe Deleted',
-      payload: req.params.activity_id,
+      payload: req.params.recipe_id,
       status: 'ok'
     })
-  } catch (error) {}
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 module.exports = {
