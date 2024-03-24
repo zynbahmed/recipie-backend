@@ -12,8 +12,8 @@ router.post(
 )
 router.put(
   '/:recipe_id',
-  middleware.stripToken,
-  middleware.verifyToken,
+  // middleware.stripToken,
+  // middleware.verifyToken,
   controller.UpdateRecipe
 )
 router.delete(

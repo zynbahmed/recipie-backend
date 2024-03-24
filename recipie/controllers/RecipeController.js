@@ -49,6 +49,7 @@ const CreateRecipe = async (req, res) => {
 }
 
 const UpdateRecipe = async (req, res) => {
+  console.log('got to the UpdateRecipe controller', req.body)
   try {
     const recipe = await Recipe.findByIdAndUpdate(
       req.params.recipe_id,
