@@ -14,7 +14,7 @@ const recipeSchema = new Schema(
     steps: { type: String },
     photo: { type: String },
     ingredient: [IngredientSchema],
-    creator: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    creator: { type: Schema.Types.ObjectId, ref: "User" },
     reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }]
   },
   { timestamps: true }
