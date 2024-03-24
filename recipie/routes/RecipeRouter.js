@@ -18,8 +18,8 @@ router.put(
 )
 router.delete(
   '/:recipe_id',
-  middleware.stripToken,
-  middleware.verifyToken,
+  // middleware.stripToken,
+  // middleware.verifyToken,
   controller.DeleteRecipe
 )
 
