@@ -22,31 +22,30 @@ const getRecipesDetails = async (req, res) => {
 }
 
 const CreateRecipe = async (req, res) => {
-  const title = req.body.title;
-  const description = req.body.description;
-  const cookingTime = req.body.cookingTime;
-  const steps = req.body.steps;
-  const photo = req.body.photo;
-  const ingredients = req.body.ingredients;
+  console.log('got to the create cntroller')
+  const title = req.body.title
+  const description = req.body.description
+  const cookingTime = req.body.cookingTime
+  const steps = req.body.steps
+  const photo = req.body.photo
+  const ingredients = req.body.ingredients
 
   try {
- 
     const recipe = new Recipe({
       title,
       description,
       cookingTime,
       steps,
       photo,
-      ingredient: ingredients 
-    });
-    await recipe.save();
-   
+      ingredient: ingredients
+    })
+    await recipe.save()
+
     res.send(recipe)
   } catch (error) {
     throw error
   }
 }
-
 
 const UpdateRecipe = async (req, res) => {
   try {
