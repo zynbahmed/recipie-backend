@@ -6,8 +6,8 @@ router.get('/', controller.GetRecipes)
 router.get('/:recipe_id', controller.getRecipesDetails)
 router.post(
   '/',
-  middleware.stripToken,
-  middleware.verifyToken,
+  // middleware.stripToken,
+  // middleware.verifyToken,
   controller.CreateRecipe
 )
 router.put(
@@ -18,8 +18,8 @@ router.put(
 )
 router.delete(
   '/:recipe_id',
-  middleware.stripToken,
-  middleware.verifyToken,
+  // middleware.stripToken,
+  // middleware.verifyToken,
   controller.DeleteRecipe
 )
 
