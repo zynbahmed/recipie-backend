@@ -3,7 +3,7 @@ const { Review, Recipe } = require('../models')
 const CreateReview = async (req, res) => {
   try {
     const review = await Review.create({ ...req.body })
-    const recipe = await Recipe.findById(req.params.recipe_id)
+    const recipe = await Recipe.findById(req.params.recipe)
     recipe.reviews.push(review._id)
     await (await recipe.save()).populate('reviews')
     res.send(recipe)

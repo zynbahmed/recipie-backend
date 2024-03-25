@@ -12,6 +12,7 @@ const Register = async (req, res) => {
         .send('A user with that email has already been registered!')
     } else {
       const user = await User.create({ name, email, passwordDigest })
+
       res.send(user)
     }
   } catch (error) {
@@ -20,7 +21,9 @@ const Register = async (req, res) => {
 }
 
 const Login = async (req, res) => {
+  console.log('i am here')
   try {
+    console.log(req.body)
     const { email, password } = req.body
     const user = await User.findOne({ email })
     let matched = await middleware.comparePassword(
