@@ -1,5 +1,5 @@
 const { default: mongoose } = require("mongoose")
-const { Recipe } = require("../models")
+const { Recipe, User } = require("../models")
 const { IngredientSchema } = require("../models/")
 
 const GetRecipes = async (req, res) => {
@@ -38,7 +38,11 @@ const CreateRecipe = async (req, res) => {
     const recipe = new Recipe({ ...req.body })
     await recipe.save()
 
-    res.send(recipe)
+    const user = await User.findByIdAndUpdate(req.body.creator, {
+      $push: { myRecipes: recipe._id }
+    }, { new: true })
+
+    res.send({ recipe: recipe, user })
   } catch (error) {
     throw error
   }
