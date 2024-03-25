@@ -1,6 +1,6 @@
-const { default: mongoose } = require('mongoose')
-const { Recipe } = require('../models')
-const { IngredientSchema } = require('../models/')
+const { default: mongoose } = require("mongoose")
+const { Recipe } = require("../models")
+const { IngredientSchema } = require("../models/")
 
 const GetRecipes = async (req, res) => {
   try {
@@ -15,7 +15,7 @@ const getRecipesDetails = async (req, res) => {
   console.log(req.params.recipe_id)
   const recipeId = req.params.recipe_id
   try {
-    const recipe = await Recipe.findById(recipeId).populate('reviews')
+    const recipe = await Recipe.findById(recipeId).populate("reviews").populate("creator")
     res.send(recipe)
   } catch (error) {
     throw error
@@ -23,23 +23,19 @@ const getRecipesDetails = async (req, res) => {
 }
 
 const CreateRecipe = async (req, res) => {
-  console.log('got to the create cntroller')
-  const title = req.body.title
-  const description = req.body.description
-  const cookingTime = req.body.cookingTime
-  const steps = req.body.steps
-  const photo = req.body.photo
-  const ingredients = req.body.ingredients
+  console.log("got to the create cntroller")
+  const payload = res.locals.payload
+  // req.body.creator = payload.id
+  // console.log(req.body.creator)
+  // const title = req.body.title
+  // const description = req.body.description
+  // const cookingTime = req.body.cookingTime
+  // const steps = req.body.steps
+  // const photo = req.body.photo
+  // const ingredients = req.body.ingredients
 
   try {
-    const recipe = new Recipe({
-      title,
-      description,
-      cookingTime,
-      steps,
-      photo,
-      ingredient: ingredients
-    })
+    const recipe = new Recipe({ ...req.body })
     await recipe.save()
 
     res.send(recipe)
@@ -63,13 +59,13 @@ const UpdateRecipe = async (req, res) => {
 
 const DeleteRecipe = async (req, res) => {
   try {
-    console.log('got here in the delete controller', req.params.recipe_id)
+    console.log("got here in the delete controller", req.params.recipe_id)
     const recipeId = req.params.recipe_id
     await Recipe.findOneAndDelete({ _id: recipeId })
     res.send({
-      msg: 'Recipe Deleted',
+      msg: "Recipe Deleted",
       payload: req.params.recipe_id,
-      status: 'ok'
+      status: "ok"
     })
   } catch (error) {
     console.log(error)
