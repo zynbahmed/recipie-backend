@@ -1,10 +1,10 @@
-const { Schema } = require("mongoose")
+const { Schema } = require('mongoose')
 
 const reviewSchema = new Schema(
   {
     content: { type: String },
     rating: { type: Number },
-    user: { type: Schema.Types.ObjectId, ref: "User" },
+    user: { type: Schema.Types.ObjectId, ref: 'User' },
     userName: String,
     userAvatar: String
   },
