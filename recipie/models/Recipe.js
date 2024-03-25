@@ -1,4 +1,4 @@
-const { Schema } = require("mongoose")
+const { Schema } = require('mongoose')
 
 const IngredientSchema = new Schema({
   name: { type: String },
@@ -14,8 +14,9 @@ const recipeSchema = new Schema(
     steps: { type: String },
     photo: { type: String },
     ingredient: [IngredientSchema],
-    creator: { type: Schema.Types.ObjectId, ref: "User" },
-    reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }]
+    category: { type: String },
+    creator: { type: Schema.Types.ObjectId, ref: 'User' },
+    reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }]
   },
   { timestamps: true }
 )

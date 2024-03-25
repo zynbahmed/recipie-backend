@@ -1,8 +1,9 @@
-const { default: mongoose } = require("mongoose")
-const { Recipe, User } = require("../models")
-const { IngredientSchema } = require("../models/")
+const { default: mongoose } = require('mongoose')
+const { Recipe, User } = require('../models')
+const { IngredientSchema } = require('../models/')
 
 const GetRecipes = async (req, res) => {
+  console.log(req.query.cat)
   try {
     const recipes = await Recipe.find({})
     res.send(recipes)
@@ -10,12 +11,21 @@ const GetRecipes = async (req, res) => {
     throw error
   }
 }
+const GetRecipeByCat = async (req, res) => {
+  console.log(req.query.cat)
+  try {
+    const selected = await Recipe.find({ category: req.query.cat })
+    res.send(selected)
+  } catch (error) {}
+}
 
 const getRecipesDetails = async (req, res) => {
   console.log(req.params.recipe_id)
   const recipeId = req.params.recipe_id
   try {
-    const recipe = await Recipe.findById(recipeId).populate("reviews").populate("creator")
+    const recipe = await Recipe.findById(recipeId)
+      .populate('reviews')
+      .populate('creator')
     res.send(recipe)
   } catch (error) {
     throw error
@@ -23,7 +33,7 @@ const getRecipesDetails = async (req, res) => {
 }
 
 const CreateRecipe = async (req, res) => {
-  console.log("got to the create cntroller")
+  console.log('got to the create cntroller')
   const payload = res.locals.payload
   // req.body.creator = payload.id
   // console.log(req.body.creator)
@@ -38,9 +48,13 @@ const CreateRecipe = async (req, res) => {
     const recipe = new Recipe({ ...req.body })
     await recipe.save()
 
-    const user = await User.findByIdAndUpdate(req.body.creator, {
-      $push: { myRecipes: recipe._id }
-    }, { new: true })
+    const user = await User.findByIdAndUpdate(
+      req.body.creator,
+      {
+        $push: { myRecipes: recipe._id }
+      },
+      { new: true }
+    )
 
     res.send({ recipe: recipe, user })
   } catch (error) {
@@ -49,6 +63,7 @@ const CreateRecipe = async (req, res) => {
 }
 
 const UpdateRecipe = async (req, res) => {
+  console.log('got to the UpdateRecipe controller', req.body)
   try {
     const recipe = await Recipe.findByIdAndUpdate(
       req.params.recipe_id,
@@ -63,13 +78,13 @@ const UpdateRecipe = async (req, res) => {
 
 const DeleteRecipe = async (req, res) => {
   try {
-    console.log("got here in the delete controller", req.params.recipe_id)
+    console.log('got here in the delete controller', req.params.recipe_id)
     const recipeId = req.params.recipe_id
     await Recipe.findOneAndDelete({ _id: recipeId })
     res.send({
-      msg: "Recipe Deleted",
+      msg: 'Recipe Deleted',
       payload: req.params.recipe_id,
-      status: "ok"
+      status: 'ok'
     })
   } catch (error) {
     console.log(error)
@@ -78,6 +93,7 @@ const DeleteRecipe = async (req, res) => {
 
 module.exports = {
   GetRecipes,
+  GetRecipeByCat,
   getRecipesDetails,
   CreateRecipe,
   UpdateRecipe,
