@@ -17,18 +17,4 @@ router.get(
   controller.CheckSession
 )
 
-router.get(
-  '/',
-  middleware.stripToken,
-  middleware.verifyToken,
-  controller.GetUserDetails
-)
-
-router.put(
-  '/update',
-  middleware.stripToken,
-  middleware.verifyToken,
-  controller.UpdateUser
-)
-
 module.exports = router
