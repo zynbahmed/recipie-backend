@@ -40,8 +40,28 @@ const UpdateUser = async (req, res) => {
   }
 }
 
+const DeleteList = async (req, res) => {
+  try {
+    const id = req.params.id
+    console.log(id)
+    await User.findOneAndUpdate(
+      { _id: res.locals.payload.id },
+      { $pull: { shoppingList: id } },
+      { new: true }
+    )
+    res.send({
+      msg: "List Deleted",
+      payload: req.params.id,
+      status: "ok"
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 module.exports = {
   SaveRecipe,
   GetUserDetails,
-  UpdateUser
+  UpdateUser,
+  DeleteList
 }

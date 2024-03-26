@@ -28,6 +28,7 @@ const Login = async (req, res) => {
     const user = await User.findOne({ email })
       .populate("savedRecipes")
       .populate("myRecipes")
+      .populate("shoppingList")
     let matched = await middleware.comparePassword(
       user.passwordDigest,
       password
@@ -88,8 +89,6 @@ const CheckSession = async (req, res) => {
   const { payload } = res.locals
   res.send(payload)
 }
-
-
 
 module.exports = {
   Register,
