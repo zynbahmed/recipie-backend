@@ -13,6 +13,8 @@ const RecipeRouter = require('./routes/RecipeRouter')
 const ReviewRouter = require('./routes/ReviewRouter')
 const UserRouter = require('./routes/UserRouter')
 const IndexRouter = require('./routes/IndexRouter')
+const ShoppingList = require('./routes/ShoppingList')
+
 const PORT = process.env.PORT || 3001
 
 const db = require('./db')
@@ -42,6 +44,8 @@ app.use('/recipe', RecipeRouter)
 app.use('/', ReviewRouter)
 app.use('/', UserRouter)
 app.use('/', IndexRouter)
+app.use('/list', ShoppingList)
+
 app.use('/', (req, res) => {
   res.send(`Connected!`)
 })

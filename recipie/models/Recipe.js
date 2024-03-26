@@ -3,7 +3,8 @@ const { Schema } = require('mongoose')
 const IngredientSchema = new Schema({
   name: { type: String },
   amount: { type: Number },
-  unit: { type: String }
+  unit: { type: String },
+  userQty: { type:Number, default: 1 }
 })
 
 const recipeSchema = new Schema(

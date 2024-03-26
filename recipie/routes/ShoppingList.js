@@ -1,13 +1,13 @@
 const router = require('express').Router()
-const controller = require('../controllers/UserController')
+const controller = require('../controllers/ListController')
 const middleware = require('../middleware')
 
+router.get('/', controller.GetList)
 router.post(
-  '/recipe/:recipes_id',
+  '/',
   middleware.stripToken,
   middleware.verifyToken,
-  controller.SaveRecipe
+  controller.CreateList 
 )
-
 
 module.exports = router

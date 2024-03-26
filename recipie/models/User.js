@@ -1,11 +1,5 @@
 const { Schema } = require('mongoose')
 
-const IngredientSchema = new Schema({
-  name: { type: String },
-  amount: { type: Number },
-  unit: { type: String }
-})
-
 const userSchema = new Schema({
   name: { type: String, required: true },
   googleId: { type: String },
@@ -18,7 +12,7 @@ const userSchema = new Schema({
   },
   myRecipes: [{ type: Schema.Types.ObjectId, ref: 'Recipe' }],
   savedRecipes: [{ type: Schema.Types.ObjectId, ref: 'Recipe' }],
-  shoppingList: [IngredientSchema]
+  shoppingList: [{ type: Schema.Types.ObjectId, ref: 'GroceryList' }]
 })
 
 module.exports = userSchema
