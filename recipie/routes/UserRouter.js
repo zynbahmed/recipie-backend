@@ -15,6 +15,14 @@ router.get(
   middleware.verifyToken,
   controller.GetUserDetails
 )
+router.get(
+  '/user/:id',
+  middleware.stripToken,
+  middleware.verifyToken,
+  controller.GetUserDetails
+)
+
+// GetUserProfile
 
 router.put(
   '/update',
