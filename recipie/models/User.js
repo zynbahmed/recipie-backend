@@ -2,8 +2,9 @@ const { Schema } = require('mongoose')
 
 const userSchema = new Schema({
   name: { type: String, required: true },
+  googleId: { type: String },
   email: { type: String, required: true },
-  passwordDigest: { type: String, required: true },
+  passwordDigest: { type: String },
   avatar: {
     type: String,
     default:
