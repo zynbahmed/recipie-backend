@@ -88,37 +88,11 @@ const CheckSession = async (req, res) => {
   res.send(payload)
 }
 
-const GetUserDetails = async (req, res) => {
-  const { payload } = res.locals
-  const userId = payload.id
-  try {
-    const user = await User.findById(userId)
-      .populate("myRecipes")
-      .populate("savedRecipes")
-    res.send(user)
-  } catch (error) {
-    throw error
-  }
-}
 
-const UpdateUser = async (req, res) => {
-  const { payload } = res.locals
-  const userId = payload.id
-  try {
-    const user = await User.findByIdAndUpdate(userId, req.body, {
-      new: true
-    })
-    res.send(user)
-  } catch (error) {
-    throw error
-  }
-}
 
 module.exports = {
   Register,
   Login,
   UpdatePassword,
-  CheckSession,
-  GetUserDetails,
-  UpdateUser
+  CheckSession
 }
