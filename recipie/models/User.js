@@ -1,10 +1,4 @@
-const { Schema } = require("mongoose")
-
-const IngredientSchema = new Schema({
-  name: { type: String },
-  amount: { type: Number },
-  unit: { type: String }
-})
+const { Schema } = require('mongoose')
 
 const userSchema = new Schema({
   name: { type: String, required: true },
@@ -13,11 +7,11 @@ const userSchema = new Schema({
   avatar: {
     type: String,
     default:
-      "https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png"
+      'https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png'
   },
-  myRecipes: [{ type: Schema.Types.ObjectId, ref: "Recipe" }],
-  savedRecipes: [{ type: Schema.Types.ObjectId, ref: "Recipe" }],
-  shoppingList: [IngredientSchema]
+  myRecipes: [{ type: Schema.Types.ObjectId, ref: 'Recipe' }],
+  savedRecipes: [{ type: Schema.Types.ObjectId, ref: 'Recipe' }],
+  shoppingList: [{ type: Schema.Types.ObjectId, ref: 'GroceryList' }]
 })
 
 module.exports = userSchema
