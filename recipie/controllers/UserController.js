@@ -20,6 +20,7 @@ const GetUserDetails = async (req, res) => {
     const user = await User.findById(userId)
       .populate("myRecipes")
       .populate("savedRecipes")
+      .populate("shoppingList")
     res.send(user)
   } catch (error) {
     throw error

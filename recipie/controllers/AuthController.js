@@ -39,7 +39,8 @@ const Login = async (req, res) => {
         name: user.name,
         avatar: user.avatar,
         savedRecipes: user.savedRecipes,
-        myRecipes: user.myRecipes
+        myRecipes: user.myRecipes,
+        shoppingList: user.shoppingList
       }
 
       let token = middleware.createToken(payload)
