@@ -10,7 +10,6 @@ const GetList = async (req, res) => {
 }
 
 const CreateList = async (req, res) => {
-  console.log(req.body)
   try {
     let item =[]
     const id = res.locals.payload
@@ -22,16 +21,13 @@ const CreateList = async (req, res) => {
       name: item,
       user: id.id
     })
-    console.log('hh')
     await User.updateOne(
       { _id: req.body.user.id },
       { $push: { shoppingList: grocery._id } }
     )
-    console.log('ll')
     res.send(item)
   } catch (error) {
     throw error
-    // res.json({ error: error.massage })
   }
 }
 

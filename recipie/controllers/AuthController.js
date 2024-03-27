@@ -21,7 +21,6 @@ const Register = async (req, res) => {
 }
 
 const Login = async (req, res) => {
-  console.log("i am here")
   try {
     console.log(req.body)
     const { email, password } = req.body

@@ -1,9 +1,7 @@
 const { default: mongoose } = require("mongoose")
 const { Recipe, User } = require("../models")
-const { IngredientSchema } = require("../models/")
 
 const GetRecipes = async (req, res) => {
-  console.log(req.query.cat)
   try {
     const recipes = await Recipe.find({})
     res.send(recipes)
@@ -26,7 +24,6 @@ const GetRecipeByCat = async (req, res) => {
 }
 
 const getRecipesDetails = async (req, res) => {
-  console.log(req.params.recipe_id)
   const recipeId = req.params.recipe_id
   try {
     const recipe = await Recipe.findById(recipeId)
@@ -39,17 +36,6 @@ const getRecipesDetails = async (req, res) => {
 }
 
 const CreateRecipe = async (req, res) => {
-  console.log("got to the create cntroller")
-  const payload = res.locals.payload
-  // req.body.creator = payload.id
-  // console.log(req.body.creator)
-  // const title = req.body.title
-  // const description = req.body.description
-  // const cookingTime = req.body.cookingTime
-  // const steps = req.body.steps
-  // const photo = req.body.photo
-  // const ingredients = req.body.ingredients
-
   try {
     const recipe = new Recipe({ ...req.body })
     await recipe.save()
@@ -69,7 +55,6 @@ const CreateRecipe = async (req, res) => {
 }
 
 const UpdateRecipe = async (req, res) => {
-  console.log("got to the UpdateRecipe controller", req.body)
   try {
     const recipe = await Recipe.findByIdAndUpdate(
       req.params.recipe_id,
@@ -84,7 +69,6 @@ const UpdateRecipe = async (req, res) => {
 
 const DeleteRecipe = async (req, res) => {
   try {
-    console.log("got here in the delete controller", req.params.recipe_id)
     const recipeId = req.params.recipe_id
     await Recipe.findOneAndDelete({ _id: recipeId })
     res.send({
