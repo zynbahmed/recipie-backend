@@ -3,7 +3,6 @@ const { Review, Recipe } = require('../models')
 const CreateReview = async (req, res) => {
   try {
     const payload = res.locals.payload
-    console.log(payload)
     req.body.user = payload.id
     req.body.userName = payload.name
     req.body.userAvatar = payload.avatar
