@@ -2,17 +2,23 @@ const { User } = require('../models')
 
 const SaveRecipe = async (req, res) => {
   try {
-    console.log(req.params.recipes_id)
+    // console.log("receipe id",req.params.recipes_id)
     const payload = res.locals.payload
-    console.log('payload', payload)
+    // console.log('payload', payload)
     req.body.user = payload.id
     const user = await User.findById(req.body.user)
+    // console.log(user.savedRecipes, '*****')
     if (!user.savedRecipes.includes(req.params.recipes_id)) {
       user.savedRecipes.push(req.params.recipes_id)
+      console.log('save receipe')
+      await user.save()
+      res.send(user)
     }
-    console.log(user)
-    await user.save()
-  } catch (error) {}
+    // console.log(user)
+    else res.send({ msg: 'ok' })
+  } catch (error) {
+    res.send({ error: 'error' })
+  }
 }
 
 const GetUserDetails = async (req, res) => {
