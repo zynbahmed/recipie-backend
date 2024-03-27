@@ -24,7 +24,7 @@ The development of the app was organized using a [Trello](https://trello.com/inv
 
 ## Cloning and running the app
 
-> The app can be cloned and run on a local machine. This is the repo of the front-end of the app which will also require [this back-endl](https://github.com/zynbahmed/recipie-backend) to run. Once cloned run npm install to install all the dependencies. The front-end will need a .env files which will have the Mongo DB connection string, Google client ID, secret and callback along with the saltrounds and the app secret in the .env file. 
+> The app can be cloned and run on a local machine. This is the repo of the back-end of the app which will also require [this front-endl](https://github.com/zynbahmed/recipie) to run. Once cloned run npm install to install all the dependencies. The front-end will need a .env files which will have the Mongo DB connection string, Google client ID, secret and callback along with the saltrounds and the app secret in the .env file. 
 
 ## Screenshots of the app 
 > The add recipe page
