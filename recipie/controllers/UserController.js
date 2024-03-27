@@ -29,7 +29,8 @@ const GetUserDetails = async (req, res) => {
   }
 }
 const GetUserProfile = async (req, res) => {
-  req.params.id
+  console.log('this is the profile', req.params.id)
+
   try {
     const id = req.params.id
     const getProfile = await User.findById(id).populate('myRecipes')

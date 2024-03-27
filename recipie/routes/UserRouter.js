@@ -19,7 +19,7 @@ router.get(
   '/user/:id',
   middleware.stripToken,
   middleware.verifyToken,
-  controller.GetUserDetails
+  controller.GetUserProfile
 )
 
 // GetUserProfile
