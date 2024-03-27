@@ -37,11 +37,4 @@ router.put(
   controller.UpdateUser
 )
 
-router.put(
-  '/:id',
-  middleware.stripToken,
-  middleware.verifyToken,
-  controller.DeleteList
-)
-
 module.exports = router

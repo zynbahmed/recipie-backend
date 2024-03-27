@@ -1,4 +1,4 @@
-const { User } = require('../models')
+const { User } = require("../models")
 
 const SaveRecipe = async (req, res) => {
   try {
@@ -9,10 +9,9 @@ const SaveRecipe = async (req, res) => {
       user.savedRecipes.push(req.params.recipes_id)
       await user.save()
       res.send(user)
-    }
-    else res.send({ msg: 'ok' })
+    } else res.send({ msg: "ok" })
   } catch (error) {
-    res.send({ error: 'error' })
+    res.send({ error: "error" })
   }
 }
 const unSaveRecipe = async (req, res) => {
@@ -32,9 +31,9 @@ const GetUserDetails = async (req, res) => {
   const userId = payload.id
   try {
     const user = await User.findById(userId)
-      .populate('myRecipes')
-      .populate('savedRecipes')
-      .populate('shoppingList')
+      .populate("myRecipes")
+      .populate("savedRecipes")
+      .populate("shoppingList")
     res.send(user)
   } catch (error) {
     throw error
@@ -43,7 +42,7 @@ const GetUserDetails = async (req, res) => {
 const GetUserProfile = async (req, res) => {
   try {
     const id = req.params.id
-    const getProfile = await User.findById(id).populate('myRecipes')
+    const getProfile = await User.findById(id).populate("myRecipes")
     res.send(getProfile)
   } catch (error) {}
 }
@@ -61,29 +60,10 @@ const UpdateUser = async (req, res) => {
   }
 }
 
-const DeleteList = async (req, res) => {
-  try {
-    const id = req.params.id
-    await User.findOneAndUpdate(
-      { _id: res.locals.payload.id },
-      { $pull: { shoppingList: id } },
-      { new: true }
-    )
-    res.send({
-      msg: 'List Deleted',
-      payload: req.params.id,
-      status: 'ok'
-    })
-  } catch (error) {
-    console.log(error)
-  }
-}
-
 module.exports = {
   SaveRecipe,
   GetUserDetails,
   UpdateUser,
-  DeleteList,
   GetUserProfile,
   unSaveRecipe
 }

@@ -22,7 +22,6 @@ const Register = async (req, res) => {
 
 const Login = async (req, res) => {
   try {
-    console.log(req.body)
     const { email, password } = req.body
     const user = await User.findOne({ email })
       .populate("savedRecipes")
