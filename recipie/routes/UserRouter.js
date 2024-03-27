@@ -8,6 +8,12 @@ router.post(
   middleware.verifyToken,
   controller.SaveRecipe
 )
+router.delete(
+  '/unsave/:recipes_id',
+  middleware.stripToken,
+  middleware.verifyToken,
+  controller.unSaveRecipe
+)
 
 router.get(
   '/',

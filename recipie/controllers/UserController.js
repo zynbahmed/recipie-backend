@@ -20,6 +20,17 @@ const SaveRecipe = async (req, res) => {
     res.send({ error: 'error' })
   }
 }
+const unSaveRecipe = async (req, res) => {
+  const { payload } = res.locals
+  try {
+    const user = await User.findByIdAndUpdate(
+      payload.id,
+      { $pull: { savedRecipes: req.params.recipes_id } },
+      { new: true }
+    )
+    res.send(user)
+  } catch (error) {}
+}
 
 const GetUserDetails = async (req, res) => {
   const { payload } = res.locals
@@ -81,5 +92,6 @@ module.exports = {
   GetUserDetails,
   UpdateUser,
   DeleteList,
-  GetUserProfile
+  GetUserProfile,
+  unSaveRecipe
 }
